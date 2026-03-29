@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block page_title %}digihike - Welkom{% endblock %}
+
+{% block page_content %}
+<div class="overflow-hidden rounded-[2rem] bg-slate-950 px-6 py-12 text-white shadow-2xl sm:px-10">
+    <p class="text-sm uppercase tracking-[0.38em] text-slate-400">digihike STAM</p>
+    <h1 class="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">Ontdek opdrachten, deel uploads en volg de tussenstand.</h1>
+    <p class="mt-6 max-w-2xl text-base leading-8 text-slate-300">Alle deelnemende teams kunnen hier inloggen, opdrachten bekijken en inzendingen uploaden. Gebruik dit portal als jouw startpunt voor de digihike.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'crazy88_view' %}" class="inline-flex items-center justify-center rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-400/20 transition hover:bg-cyan-300">Bekijk tussenstand</a>
+        <a href="{% url 'crazy88_view-list' 'Stamp' %}" class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/20">Opdrachten</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="inline-flex items-center justify-center rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-400/20 transition hover:bg-cyan-300">Inloggen</a>
+        {% endif %}
+    </div>
+</div>
+
+{% if poster_entries %}
+<div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {% for poster in poster_entries %}
+    <article class="overflow-hidden rounded-[1.75rem] bg-white shadow-xl transition hover:-translate-y-1 hover:shadow-2xl">
+        <img src="{{ poster.poster_image.url }}" alt="Poster {{ forloop.counter }}" class="h-64 w-full object-cover" />
+        <div class="p-6">
+            <p class="text-xs uppercase tracking-[0.35em] text-slate-500">Poster {{ forloop.counter }}</p>
+            <p class="mt-4 text-sm leading-6 text-slate-700">Een visuele preview van de actuele digihike. Gebruik deze pagina als startpunt om snel naar jouw teampagina te navigeren.</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Aanmelding gelukt - digihike{% endblock %}
+
+{% block page_content %}
+<div class="mx-auto max-w-2xl rounded-[2rem] bg-white p-8 shadow-xl shadow-slate-200/60">
+    <div class="mb-6">
+        <p class="text-sm uppercase tracking-[0.35em] text-cyan-600">Succes</p>
+        <h1 class="mt-3 text-3xl font-semibold text-slate-950">Het aanmelden is gelukt!</h1>
+        <p class="mt-4 text-sm leading-6 text-slate-600">De inloggegevens zijn verstuurd naar {{ emails }}. Check je spam! Mocht het niet zijn aangekomen, neem dan even contact op.</p>
+    </div>
+    <a href="{% url 'login' %}" class="inline-flex items-center justify-center rounded-full bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">Verder naar inloggen</a>
+</div>
+{% endblock %}

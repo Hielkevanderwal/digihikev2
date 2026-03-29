@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}Team aanmelden - digihike{% endblock %}
+
+{% block page_content %}
+<div class="mx-auto max-w-2xl rounded-[2rem] bg-white p-8 shadow-xl shadow-slate-200/60">
+    <div class="mb-6">
+        <p class="text-sm uppercase tracking-[0.35em] text-cyan-600">Team aanmelden</p>
+        <h1 class="mt-3 text-3xl font-semibold text-slate-950">Maak je team aan</h1>
+        <p class="mt-2 text-sm leading-6 text-slate-600">Vul de gegevens in om een nieuw team aan te melden voor de digihike.</p>
+    </div>
+    <form action="{% url 'team_aanmelden' %}" method="post" class="space-y-6">
+        {% csrf_token %}
+        {{ form }}
+        <div>
+            <input type="submit" value="Aanmelden" class="btn-primary w-full px-6 py-3 text-white" />
+        </div>
+    </form>
+</div>
+{% endblock %}

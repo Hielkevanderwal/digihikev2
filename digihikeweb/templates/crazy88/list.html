@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Opdrachten - digihike{% endblock %}
+
+{% block page_content %}
+<div class="mb-8 rounded-[2rem] bg-white px-6 py-8 shadow-xl sm:px-8">
+    <div class="flex items-center justify-between gap-4">
+        <div>
+            <p class="text-sm uppercase tracking-[0.35em] text-cyan-600">Opdrachten</p>
+            <h1 class="mt-3 text-3xl font-semibold text-slate-950">Alle actieve opdrachten</h1>
+        </div>
+    </div>
+</div>
+
+<div class="grid gap-6">
+    {% for mission in missions %}
+    <article class="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+                <h2 class="text-xl font-semibold text-slate-950">{{mission.points}}pt - {{ mission.title }}</h2>
+                <p class="mt-3 text-sm leading-6 text-slate-600">{{ mission.description }} {% if mission.capture_type %}• {{ mission.capture_type }}{% endif %}</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    {% for team in mission.teams_completed %}
+                    <span class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-700">{{ team.team_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <a href="{% url 'crazy88_view-detailed' mission_group.name mission.title %}" class="inline-flex h-fit items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Bekijken</a>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}
