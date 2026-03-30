@@ -32,7 +32,17 @@
         <div class="space-y-3">
             {% for mission_group in active_mission_groups %}
             <a href="{% url 'crazy88_view-list' mission_group.name %}" class="block rounded-[1.5rem] border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-semibold text-slate-900 transition hover:bg-slate-100">
-                {{ mission_group.name }} • {{ mission_group.get_nr_missions }} opdrachten
+                <div class="flex items-center justify-between gap-4">
+                    <span>{{ mission_group.name }} • {{ mission_group.get_nr_missions }} opdrachten</span>
+                    <div class="flex flex-wrap gap-2">
+                        {% if mission_group.pending_count > 0 %}
+                        <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700">⏳ {{ mission_group.pending_count }}</span>
+                        {% endif %}
+                        {% if mission_group.completed_count > 0 %}
+                        <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">✅ {{ mission_group.completed_count }}</span>
+                        {% endif %}
+                    </div>
+                </div>
             </a>
             {% endfor %}
         </div>

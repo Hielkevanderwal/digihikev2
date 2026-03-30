@@ -13,11 +13,26 @@ from random import choice
 # Create your views here.
 @login_required
 def crazy88_view_home(request):
-    active_mission_groups = MissionGroup.objects.filter(active = True)
-    
+    active_mission_groups = MissionGroup.objects.filter(active=True)
+    team = Team.objects.filter(team_members__in=[request.user]).first()
+
+    for mission_group in active_mission_groups:
+        if team:
+            mission_group.completed_count = mission_group.missions.filter(
+                submission__team=team,
+                submission__validated=True,
+            ).distinct().count()
+            mission_group.pending_count = mission_group.missions.filter(
+                submission__team=team,
+                submission__validated__isnull=True,
+            ).distinct().count()
+        else:
+            mission_group.completed_count = 0
+            mission_group.pending_count = 0
+
     return render(request, "crazy88/overview.html", context={
         "teams": Team.objects.all().order_by('-team_score'),
-        "active_mission_groups": active_mission_groups
+        "active_mission_groups": active_mission_groups,
     })
 
 @login_required

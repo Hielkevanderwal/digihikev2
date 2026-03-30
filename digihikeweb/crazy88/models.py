@@ -40,7 +40,7 @@ class MissionGroup(models.Model):
 class Mission(models.Model):
     title = models.CharField(max_length=120)
     points = models.IntegerField(default=5)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     capture_type = models.CharField(
         max_length=10, 
         choices=MediaType.choices, 
@@ -68,12 +68,16 @@ class Submission(models.Model):
 
     media = models.FileField(
         upload_to='uploads', 
-        validators=[FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS)]
+        validators=[FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS)],
+        blank=True, null=True
     )
     
     validated = models.BooleanField(null=True, blank=True)
 
     def is_vid(self):
+        if not self.media:
+            return False
+        
         name, extension = os.path.splitext(self.media.name)
         return extension.lower().lstrip('.') in VIDEO_EXTENSIONS
     

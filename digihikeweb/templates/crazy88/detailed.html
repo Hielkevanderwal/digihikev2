@@ -41,12 +41,20 @@
                 </video-js>
             </div>
             {% else %}
+            {% if mission_exe.media %}
             <img src="{{ mission_exe.media.url }}" alt="Upload door {{ mission_exe.team.team_name }}" class="h-64 w-full rounded-[1.5rem] object-cover object-center" />
+            {% endif %}
             {% endif %}
 
             {% if mission_exe.description != "" %}
             <div class="mt-5 rounded-[1.5rem] bg-slate-50 p-4 text-sm leading-6 text-slate-700">
                 {{ mission_exe.description }}
+            </div>
+            {% endif %}
+
+            {% if mission_exe.feedback != "" %}
+            <div class="mt-5 rounded-[1.5rem] bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+                feedback: {{ mission_exe.feedback }}
             </div>
             {% endif %}
         </div>

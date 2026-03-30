@@ -25,8 +25,12 @@ SECRET_KEY = 'django-insecure-+2y1hr6z$i(jvx7fors7xi3-gwvmov$$r&5j617@udyoeuqown
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["digihike.triathike.nl", "digihike.hiel.ke", "localhost", "127.0.0.1"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://digihike.triathike.nl",
+    "https://digihike.hiel.ke",
+]
 
 # Application definition
 
