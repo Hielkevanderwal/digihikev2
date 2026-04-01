@@ -38,10 +38,29 @@ def crazy88_view_home(request):
 @login_required
 def crazy88_view_list(request, mission_group_name):
     mission_group = get_object_or_404(MissionGroup, name = mission_group_name)
+    team = Team.objects.filter(team_members__in=[request.user]).first()
+
+    missions = list(mission_group.missions.all())
+    if team:
+        for mission in missions:
+            mission.completed = Submission.objects.filter(
+                mission=mission,
+                team=team,
+                validated=True,
+            ).exists()
+            mission.pending = Submission.objects.filter(
+                mission=mission,
+                team=team,
+                validated__isnull=True,
+            ).exists()
+    else:
+        for mission in missions:
+            mission.completed = False
+            mission.pending = False
 
     return render(request, "crazy88/list.html", context={
         "mission_group": mission_group,
-        "missions": mission_group.missions.all()
+        "missions": missions,
     })
 
 @login_required

@@ -7,12 +7,12 @@
     <div class="mb-8 text-center">
         <p class="text-sm uppercase tracking-[0.32em] text-slate-500">Welkom terug</p>
         <h1 class="mt-4 text-3xl font-semibold text-slate-900">Inloggen</h1>
-        <p class="mt-2 text-sm leading-6 text-slate-600">Log in met je teamnaam en wachtwoord om verder te gaan.</p>
+        <p class="mt-2 text-sm leading-6 text-slate-600">Log in met je gebruikersnaam en wachtwoord om verder te gaan.</p>
     </div>
 
     {% if form.errors %}
     <div class="mb-6 rounded-3xl bg-rose-100 px-4 py-4 text-sm text-rose-800 ring-1 ring-rose-200">
-        Your username and password didn't match. Please try again.
+        Je wachtwoord of gebruikersnaam is onjuist. Probeer het opnieuw.
     </div>
     {% endif %}
 
@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <a href="{% url 'password_reset' %}" class="text-sm font-medium text-cyan-600 transition hover:text-cyan-500">Wachtwoord vergeten?</a>
+            <a href="" class="text-sm font-medium text-cyan-600 transition hover:text-cyan-500"></a>
             <button type="submit" class="btn-primary inline-flex w-full justify-center px-6 py-3 text-sm text-white sm:w-auto">Inloggen</button>
         </div>
     </form>

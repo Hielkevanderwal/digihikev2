@@ -4,9 +4,16 @@ from .models import Submission, Mission, MissionGroup
 
 # Register your models here.
 
-admin.site.register(Mission)
-admin.site.register(MissionGroup)
+@admin.register(MissionGroup)
+class MissionGroupAdmin(admin.ModelAdmin):
+    list_display = ("name", "active")
+    list_filter = ("active",)z
 
+@admin.register(Mission)
+class MissionAdmin(admin.ModelAdmin):
+    list_display = ("title", "points", "capture_type", "group")
+    list_filter = ("capture_type", "group")
+    search_fields = ("title", "description")
 
 @admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):
