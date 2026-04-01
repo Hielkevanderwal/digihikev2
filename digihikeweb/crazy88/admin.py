@@ -7,7 +7,7 @@ from .models import Submission, Mission, MissionGroup
 @admin.register(MissionGroup)
 class MissionGroupAdmin(admin.ModelAdmin):
     list_display = ("name", "active")
-    list_filter = ("active",)z
+    list_filter = ("active",)
 
 @admin.register(Mission)
 class MissionAdmin(admin.ModelAdmin):
