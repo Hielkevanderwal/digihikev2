@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 
 from accounts.models import Team
@@ -75,7 +75,7 @@ def view_detailed_task(request, mission_group_name, mission_title):
 
             new_sub.save()
 
-            return HttpResponseRedirect('')
+            return redirect("crazy88_view-detailed", mission_group_name=mission_group_name, mission_title=mission_title)
 
     mission_group = get_object_or_404(MissionGroup, name = mission_group_name)
     mission = mission_group.missions.filter(title = mission_title).first()
